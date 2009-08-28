@@ -119,7 +119,7 @@
 
 @implementation DeviceTrack
 
-@synthesize name, artist, album, length, hash, cover, rating;
+@synthesize name, artist, album, length, cover, rating;
 @synthesize scrobbled, nowPlayingSent, loved, banned, addedToPlaylist;
 
 - (id)initWithName:(NSString *)aName artist:(NSString *)aArtist album:(NSString *)aAlbum length:(double)aLength
