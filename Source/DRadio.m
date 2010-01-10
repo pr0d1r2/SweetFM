@@ -532,8 +532,10 @@
 	//
 	NSString *playlistName = [HSettings exportPlaylistName];
 	
-	if(!playlistName)
-		playlistName = station.stationName;
+	if(!playlistName){
+		// Make Playlistname a little prettier
+		playlistName = [station.stationName capitalizedString];
+	}
 		
 	[[Exporter instance] export:track
 									 toPlaylist:playlistName
