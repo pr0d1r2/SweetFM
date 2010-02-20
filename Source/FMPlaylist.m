@@ -32,6 +32,7 @@
 
 
 NSString * const PlaylistPattern = @"http://ws.audioscrobbler.com/radio/xspf.php?sk=%@&discovery=0&desktop=1.5.1";
+NSString * const TagPattern = @"http://ws.audioscrobbler.com/2.0/?method=track.gettoptags&artist=%@&track=%@&api_key=b25b959554ed76058ac220b7b2e0a026";
 
 //
 // Proxy
@@ -114,9 +115,43 @@ NSString * const PlaylistPattern = @"http://ws.audioscrobbler.com/radio/xspf.php
 	NSArray *xmlTracks = [[doc rootElement] nodesForXPath:@"/playlist[1]/trackList[1]/track"
 																									error:&err];
 	
-	for(NSXMLElement *e in xmlTracks)
-	{
-		FMTrack *track = [[FMTrack alloc] initWithXMLElement:e];
+	for (NSXMLElement *e in xmlTracks)
+	{		
+		// Quick hack to add first top tag as genre
+		NSString *creator, *title, *genre;
+		
+		for (NSXMLElement *elem in [e children])
+		{
+			if([[elem name] isEqualToString:@"creator"])
+				creator = [[elem stringValue] stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+			
+			if([[elem name] isEqualToString:@"title"])
+				title = [[elem stringValue] stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+		}
+		
+		if (creator && title) {
+			NSString *req = [NSString stringWithFormat:TagPattern, creator, title];
+			
+			NSData *data = [self HTTPGetString:req];
+			
+			if (data) {
+				NSError *err=noErr;
+				NSXMLDocument *doc = [[[NSXMLDocument alloc] initWithData:data options:NSXMLDocumentTidyXML error:&err] autorelease];
+				
+				if (err || !doc) {
+					self.lastError = @"Error querying genre";
+				}
+				
+				NSArray *xmlTopTags = [[doc rootElement] nodesForXPath:@"/lfm[1]/toptags[1]/tag[1]/name" error:&err];
+				
+				for (NSXMLElement *genreElem in xmlTopTags) {
+					genre = [genreElem stringValue];
+				}
+			}
+		}
+		
+		FMTrack *track = (genre) ? [[FMTrack alloc] initWithXMLElement:e withGenre:genre] : [[FMTrack alloc] initWithXMLElement:e];
+			
 		[tracks addObject:track];
 		[track release];
 	}

@@ -119,16 +119,17 @@
 
 @implementation DeviceTrack
 
-@synthesize name, artist, album, length, cover, rating;
+@synthesize name, artist, album, genre, length, cover, rating;
 @synthesize scrobbled, nowPlayingSent, loved, banned, addedToPlaylist;
 
-- (id)initWithName:(NSString *)aName artist:(NSString *)aArtist album:(NSString *)aAlbum length:(double)aLength
+- (id)initWithName:(NSString *)aName artist:(NSString *)aArtist album:(NSString *)aAlbum genre:(NSString *)aGenre length:(double)aLength
 {
 	if(self = [super init])
 	{
 		name = [aName copy];
 		artist = [aArtist copy];
 		album = [aAlbum copy];
+		genre = [aGenre copy];
 		length = aLength;
 	}
 	
@@ -140,6 +141,7 @@
 	[name release];
 	[artist release];
 	[album release];
+	[genre release];
 	self.cover = nil;
 	
 	[super dealloc];

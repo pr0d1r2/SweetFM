@@ -199,6 +199,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Exporter, instance);
 	[tagger examineFile:path];
 	[tagger setTitle:aTrack.name];
 	[tagger setAlbum:aTrack.album];
+	if (aTrack.genre)
+		[tagger setGenreName:[NSArray arrayWithObject:aTrack.genre]];
 	[tagger setArtist:aTrack.artist];
 	[tagger setComments:@"Recorded with SweetFM"];
 	

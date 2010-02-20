@@ -390,6 +390,7 @@
 			devTrack = [[DeviceTrack alloc] initWithName:track.name
 												  artist:track.artist
 												   album:track.album
+												   genre:track.genre
 												  length:track.duration];
 		}
 		@catch (NSException *e) {

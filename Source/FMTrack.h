@@ -48,6 +48,7 @@
 @property (readonly) NSURL *freeTrackURL;
 
 - (id)initWithXMLElement:(NSXMLElement *)xml;
+- (id)initWithXMLElement:(NSXMLElement *)xml withGenre:(NSString *)genreName;
 
 - (NSString *)valueForKey:(NSString *)key;
 - (NSString *)valueForKey:(NSString *)key attribute:(NSString *)attr;

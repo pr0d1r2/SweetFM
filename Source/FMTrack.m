@@ -58,7 +58,21 @@ NSString * const TrackLinkFreeTrackURLAttribute = @"http://www.last.fm/freeTrack
 	NSString *aAlbum = [self valueForKey:TrackAlbumKey];
 	double aLength = (double)([[self valueForKey:TrackDurationKey] integerValue]/1000);
 	
-	self = [super initWithName:aName artist:aArtist album:aAlbum length:aLength];
+	self = [super initWithName:aName artist:aArtist album:aAlbum genre:nil length:aLength];
+	
+	return self;
+}
+
+- (id)initWithXMLElement:(NSXMLElement *)xml withGenre:(NSString *)genreName
+{
+	xmlRepresentation = [xml retain];
+	
+	NSString *aName = [self valueForKey:TrackNameKey];
+	NSString *aArtist = [self valueForKey:TrackCreatorKey];
+	NSString *aAlbum = [self valueForKey:TrackAlbumKey];
+	double aLength = (double)([[self valueForKey:TrackDurationKey] integerValue]/1000);
+	
+	self = [super initWithName:aName artist:aArtist album:aAlbum genre:genreName length:aLength];
 	
 	return self;
 }

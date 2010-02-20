@@ -101,6 +101,7 @@ typedef enum {
 	NSString *name;
 	NSString *artist;
 	NSString *album;
+	NSString *genre;
 	NSImage *cover;
 	double length;
 	NSUInteger hash;
@@ -114,11 +115,12 @@ typedef enum {
 	BOOL addedToPlaylist;
 }
 
-- (id)initWithName:(NSString *)aName artist:(NSString *)aArtist album:(NSString *)aAlbum length:(double)aLength;
+- (id)initWithName:(NSString *)aName artist:(NSString *)aArtist album:(NSString *)aAlbum genre:(NSString *)aGenre length:(double)aLength;
 
 @property (readonly, copy) NSString *name;
 @property (readonly, copy) NSString *artist;
 @property (readonly, copy) NSString *album;
+@property (readonly, copy) NSString *genre;
 @property (readonly) double length;
 @property (readonly) NSUInteger hash;
 
