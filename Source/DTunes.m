@@ -55,19 +55,19 @@
 		// Register for distributed iTunes notifications
 		//
 		[sharedNotify addObserver:self
-										 selector:@selector(iTunesLaunched:)
-												 name:NSWorkspaceDidLaunchApplicationNotification 
-											 object:nil];
+						 selector:@selector(iTunesLaunched:)
+							 name:NSWorkspaceDidLaunchApplicationNotification 
+						   object:nil];
 		
 		[sharedNotify addObserver:self
-										 selector:@selector(iTunesTerminated:)
-												 name:NSWorkspaceDidTerminateApplicationNotification 
-											 object:nil];
+						 selector:@selector(iTunesTerminated:)
+							 name:NSWorkspaceDidTerminateApplicationNotification 
+						   object:nil];
 		
 		[distribNotify addObserver:self 
-											selector:@selector(iTunesChanged:) 
-													name:@"com.apple.iTunes.playerInfo"
-												object:nil];
+						  selector:@selector(iTunesChanged:) 
+							  name:@"com.apple.iTunes.playerInfo"
+							object:nil];
 		
 		tunesState = DeviceStopped;
 		tunesHash = 0;
@@ -79,17 +79,17 @@
 		// Init scrobble session
 		//
 		self.scrobbleSession = [[[FMScrobbleSession alloc] initWithUser:[HSettings lastFmUserName] 
-																													 password:[HSettings lastFmPassword] 
-																													 playerID:PlayerIDiTunes] autorelease];
+															   password:[HSettings lastFmPassword] 
+															   playerID:PlayerIDiTunes] autorelease];
 		
 		//
 		// Init position timer
 		//
 		trackTimer = [[NSTimer scheduledTimerWithTimeInterval:1
-																			target:self 
-																		selector:@selector(updatePosition) 
-																		userInfo:nil 
-																		 repeats:YES] retain];
+													   target:self 
+													 selector:@selector(updatePosition:) 
+													 userInfo:nil 
+													  repeats:YES] retain];
 	}
 	
 	return self;
@@ -216,7 +216,7 @@
 		
 		[self _updateCurrentTrack];
 	}
-		
+	
 	if(!suspended)
 	{
 		if(tunesHash != newHash || tunesState==DeviceStopped)
@@ -291,7 +291,7 @@
 		tunesPosition = pos;
 	}
 }
-	
+
 - (double)position
 {	
 	// TODO: Hangs on iTunes quit
@@ -388,9 +388,9 @@
 		@try
 		{
 			devTrack = [[DeviceTrack alloc] initWithName:track.name
-																						artist:track.artist
-																						 album:track.album
-																						length:track.duration];
+												  artist:track.artist
+												   album:track.album
+												  length:track.duration];
 		}
 		@catch (NSException *e) {
 			return;

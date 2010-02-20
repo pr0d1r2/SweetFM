@@ -325,7 +325,7 @@
 		DCF753470FC991CE00C19257 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		DCF753480FC991CE00C19257 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		DCF7538C0FC9A06400C19257 /* DTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTunes.h; sourceTree = "<group>"; };
-		DCF7538D0FC9A06400C19257 /* DTunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTunes.m; sourceTree = "<group>"; };
+		DCF7538D0FC9A06400C19257 /* DTunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTunes.m; sourceTree = "<group>"; wrapsLines = 0; };
 		DCF753900FC9A18C00C19257 /* iTunesBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesBridge.h; sourceTree = "<group>"; };
 		DCF753910FC9A1B000C19257 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
 		DCF753A80FC9B36C00C19257 /* CDevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDevices.h; sourceTree = "<group>"; };
