@@ -1,6 +1,7 @@
 .DS_Store
 Fibre/build/*
 Source/build/*
+Source/dsa_priv.pem
 *.mode1v3
 *.pbxuser
 *.perspectivev3
