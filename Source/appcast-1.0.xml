@@ -1,0 +1,14 @@
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/"> 
+    <channel> 
+        <title>SweetFM Changelog</title> 
+        <link>http://cloud.github.com/downloads/MagicMoo/SweetFM/appcast-1.0.xml</link> 
+        <description>Most recent changes with links to updates.</description> 
+        <language>en</language> 
+		<item> 
+            <title>SweetFM 1.1.3</title> 
+            <pubDate>Sun, 26 Jul 2009 13:41:00 +0200</pubDate> 
+            <enclosure url="http://github.com/downloads/MagicMoo/SweetFM/SweetFM-1.1.3.zip" sparkle:version="1.1.3" length="4823449" type="application/zip" sparkle:dsaSignature="MC0CFDNOcwk2+YWU5PV5rLScvjs9OaVoAhUAmCa9+bbDfXBypjiXXz35GIPpt7s="/>
+			<sparkle:ReleaseNotesLink>http://github.com/downloads/MagicMoo/SweetFM/rnotes.html</sparkle:ReleaseNotesLink>
+        </item> 
+    </channel> 
+</rss>

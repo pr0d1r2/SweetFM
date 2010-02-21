@@ -50,7 +50,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>http://REPLACEME</string>
+	<string>http://cloud.github.com/downloads/MagicMoo/SweetFM/appcast-1.0.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 	<key>CFBundleURLTypes</key>
