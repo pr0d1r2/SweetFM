@@ -88,49 +88,53 @@ CGEventRef tapEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
 }
 
 - (void)initOnThread {
-	
+
 	CFMachPortRef eventPort;
 	CFRunLoopSourceRef eventSrc;
 	CFRunLoopRef runLoop;
 	
-	CGEventTapOptions opts = kCGEventTapOptionDefault;
+	@try {	
+		CGEventTapOptions opts = kCGEventTapOptionDefault;
+		
+		#ifdef SWEETFM_DEBUG
+			opts = kCGEventTapOptionListenOnly;
+		#endif
+		
+		eventPort = CGEventTapCreate (kCGSessionEventTap,
+																	kCGHeadInsertEventTap,
+																	opts,
+																	CGEventMaskBit(NX_SYSDEFINED) | CGEventMaskBit(NX_KEYUP),
+																	tapEventCallback,
+																	self);
+		
+		if (eventPort == NULL)
+			NSLog(@"Event port is null");
+		
+		//
+		// Get the event source from port
+		//
+		eventSrc = CFMachPortCreateRunLoopSource(kCFAllocatorSystemDefault, eventPort, 0);
+		
+		if (eventSrc == NULL)
+			NSLog(@"No event run loop source found");
+		
+		//
+		// Get the current threads run loop
+		//
+		runLoop = CFRunLoopGetCurrent();
+		
+		if (eventSrc == NULL)
+			NSLog(@"No event run loop");
+		
+		//
+		// Add the runloop source
+		//
+		CFRunLoopAddSource(runLoop, eventSrc, kCFRunLoopCommonModes);
 	
-#ifdef SWEETFM_DEBUG
-	opts = kCGEventTapOptionListenOnly;
-#endif
-	
-	eventPort = CGEventTapCreate (kCGSessionEventTap,
-																kCGHeadInsertEventTap,
-																opts,
-																CGEventMaskBit(NX_SYSDEFINED) | CGEventMaskBit(NX_KEYUP),
-																tapEventCallback,
-																self);
-	
-	if (eventPort == NULL)
-		NSLog(@"Event port is null");
-	
-	//
-	// Get the event source from port
-	//
-	eventSrc = CFMachPortCreateRunLoopSource(kCFAllocatorSystemDefault, eventPort, 0);
-	
-	if (eventSrc == NULL)
-		NSLog(@"No event run loop source found");
-	
-	//
-	// Get the current threads run loop
-	//
-	runLoop = CFRunLoopGetCurrent();
-	
-	if (eventSrc == NULL)
-		NSLog(@"No event run loop");
-	
-	//
-	// Add the runloop source
-	//
-	CFRunLoopAddSource(runLoop, eventSrc, kCFRunLoopCommonModes);
-	
-	while ([[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+		while ([[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+	} @catch (NSException *e) {
+		NSLog(@"Exception caught while attempting to create run loop for hotkey: %@", e);
+	}
 }
 
 @end
