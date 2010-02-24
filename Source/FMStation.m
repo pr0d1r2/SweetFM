@@ -173,8 +173,9 @@ NSString * const StationURLKey = @"url";
 	{
 		NSString *err = [stationInfo valueForKey:StationResponseErrorKey];
 		NSLog(@"ERROR: %@ (%@)", err, [stationInfo description]);
-		
-		if([err isEqualToString:@"4"])
+		if([err isEqualToString:@"1"])
+			self.lastError =@"There is not enough content available";
+		else if([err isEqualToString:@"4"])
 			self.lastError = @"This station is not available for streaming";
 		else if([err isEqualToString:@"5"])
 			self.lastError = @"This station is for subscribers only!";
