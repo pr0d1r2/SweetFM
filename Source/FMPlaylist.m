@@ -118,7 +118,7 @@ NSString * const TagPattern = @"http://ws.audioscrobbler.com/2.0/?method=track.g
 	for (NSXMLElement *e in xmlTracks)
 	{		
 		// Quick hack to add first top tag as genre
-		NSString *creator, *title, *genre;
+		NSString *creator, *title, *genre = @"";
 		
 		for (NSXMLElement *elem in [e children])
 		{
@@ -150,7 +150,7 @@ NSString * const TagPattern = @"http://ws.audioscrobbler.com/2.0/?method=track.g
 			}
 		}
 		
-		FMTrack *track = (genre) ? [[FMTrack alloc] initWithXMLElement:e withGenre:genre] : [[FMTrack alloc] initWithXMLElement:e];
+		FMTrack *track = (genre != @"") ? [[FMTrack alloc] initWithXMLElement:e withGenre:genre] : [[FMTrack alloc] initWithXMLElement:e];
 			
 		[tracks addObject:track];
 		[track release];
