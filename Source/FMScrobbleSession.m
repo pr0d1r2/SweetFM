@@ -289,7 +289,7 @@ NSString * const CommandTrackMetadata = @"trackMetadata";
 	NSData *reqData = [params dataUsingEncoding:NSUTF8StringEncoding];
 	NSData *data = [self HTTPPost:nowPlayingURL data:reqData];
 	
-	if(!data || ![[data UTF8String] containsString:@"ok"])
+	if(!data || ![[data UTF8String] containsString:@"OK"])
 	{
 		self.lastError = @"Error sending now playing notification";
 		return NO;
