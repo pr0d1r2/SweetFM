@@ -249,7 +249,7 @@ NSString * const CommandTrackMetadata = @"trackMetadata";
 		return NO;
 	}
 	
-	if(![[data UTF8String] containsString:@"ok"])
+	if(![[data UTF8String] containsString:@"OK"])
 	{
 		self.lastError = [NSString stringWithFormat:@"Error scrobbling track"];
 		return NO;
