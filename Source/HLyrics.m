@@ -13,7 +13,7 @@
 @implementation HLyrics
 
 +(NSString *)lyricsForTrack:(DeviceTrack *)track {
-	NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"http://lyricwiki.org/api.php?func=getSong&fmt=xml&artist=%@&song=%@",
+	NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"http://api.lyricsfly.com/api/api.php?i=841a66a0ca9c8584b-temporary.API.access&a=%@&t=%@",
 								 [track.artist stringByReplacingSpecialCharacters],
 								 [track.name stringByReplacingSpecialCharacters]]
 								stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -25,7 +25,7 @@
 		return nil;
 	}
 	
-	NSArray *result = [xml nodesForXPath:@"LyricsResult/lyrics" error:&error];
+	NSArray *result = [xml nodesForXPath:@"start/sg/tx" error:&error];
 	if(!result) {
 		XLog(@"HLyrics: %@", error);
 		return nil;
@@ -40,6 +40,7 @@
 		return nil;
 	}
 	
+	lyrics = [lyrics stringByReplacingOccurrencesOfString:@"[br]" withString:@"\n"];
 	return lyrics;
 }
 
