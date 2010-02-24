@@ -37,6 +37,8 @@
 #import "NSString+FormatUtilities.h"
 #import "NSString+Paths.h"
 
+#import "HGrowl.h"
+
 
 
 NSString * const TempExportPath = @"/tmp/sfm-dump";
@@ -309,6 +311,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Exporter, instance);
 			// Increment cashtistics
 			//
 			[HSettings incrementCashtistic];
+			
+			//
+			// Display growl notification of successful export
+			//
+			id growlImage = nil;
+			if (aTrack.cover) {
+				growlImage = aTrack.cover;
+			}
+			[[HGrowl instance] postNotificationWithName:GrowlTrackExported
+												  title:@"Track Exported..."
+											description:[aTrack.name stringByAppendingFormat:@" by %@", aTrack.artist]
+												  image:aTrack.cover];
 		}
 		
 	}
