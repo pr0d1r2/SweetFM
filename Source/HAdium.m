@@ -42,6 +42,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HAdium, instance);
 {
 	if(![HSettings adiumStatusChangeEnabled])
 		return;
+	
+	BOOL adiumRunning = NO;
+	NSArray *runningApplications = [[NSWorkspace sharedWorkspace] launchedApplications];
+	for (NSDictionary *thisApplication in runningApplications) {
+		if ([[thisApplication objectForKey:@"NSApplicationName"] isEqualToString:@"Adium"]) {
+			adiumRunning = YES;
+			break;
+		}
+	}
+	if (!adiumRunning)
+		return;
 
 	if(status != nil) 
 	{
