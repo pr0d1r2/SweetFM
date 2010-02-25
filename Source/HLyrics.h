@@ -20,5 +20,7 @@
 @interface NSString (LyricAdditions)
 
 -(NSString *)stringByReplacingSpecialCharacters;
+-(NSString *)stringByFlatteningHtml;
+-(NSString *)stringByDecodingXMLEntities;
 
 @end
