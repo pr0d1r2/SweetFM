@@ -43,7 +43,6 @@
 	
 	// Decode the lyrics
 	lyrics = [lyrics stringByDecodingXMLEntities];
-	NSLog(@"Lyrics are:\n%@", lyrics);
 	return lyrics;
 }
 
