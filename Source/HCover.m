@@ -228,7 +228,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCover, instance);
 
 - (void)addCover:(NSImage *)aCover
 {
-	[covers addObject:aCover];
+	if(aCover){
+		[covers addObject:aCover];
+	}
 }
 
 @end
